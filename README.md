@@ -1,15 +1,16 @@
-# AI Media Power Landing Page (Static Edition)
+# AI Media Power Landing Page (Static Masterpiece)
 
-Trang giới thiệu khóa học AI Media Power phiên bản tĩnh 100% (HTML/JS), tối ưu hóa tốc độ tải và khả năng hiển thị.
+Trang giới thiệu khóa học AI Media Power phiên bản tĩnh 100% (Zero Build Step).
 
-## Đặc điểm nổi bật
-- **Zero Build Step**: Không cần npm install hay build script.
-- **Design Preserved**: Giữ nguyên 100% layout, animation và màu sắc từ bản thiết kế React.
-- **API Integrated**: Tích hợp Gemini AI 2.5 trực tiếp trong trình duyệt.
+## Quy tắc thiết kế (Design Preserved)
+- **YES**: Giữ nguyên HTML markup.
+- **YES**: Giữ nguyên Tailwind classes & animations.
+- **YES**: Giữ nguyên bảng giá & roadmap.
+- **Fix**: Sử dụng `clamp()` cho giá tiền để đảm bảo không rớt chữ trên màn hình nhỏ.
 
-## Hướng dẫn deploy lên Vercel
+## Triển khai lên Vercel
 1. Import repository này vào Vercel.
-2. **Framework Preset**: Chọn **Other** (Rất quan trọng).
-3. **Build & Output Settings**: Để trống tất cả các trường.
-4. **Environment Variables**: Thêm `API_KEY` của Gemini.
+2. **Framework Preset**: Chọn `Other` (Mặc định sẽ nhận diện `index.html`).
+3. **Build & Output Settings**: Để trống (No build step).
+4. **Environment Variables**: Thêm `API_KEY` (Gemini API Key).
 5. Nhấn **Deploy**.
