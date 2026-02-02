@@ -70,6 +70,16 @@
         body { background: #0F172A; color: #f1f5f9; overflow-x: hidden; }
         .price-text { font-size: clamp(1.75rem, 5vw, 2.75rem); white-space: nowrap; }
     </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.39.0"
+  }
+}
+</script>
 </head>
 <body class="antialiased selection:bg-primary selection:text-white">
 
@@ -191,7 +201,6 @@
                 </h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                <!-- Pricing Plans Injected via JS to maintain single source of truth from constants -->
                 <div id="pricing-grid-container" class="contents"></div>
             </div>
         </div>
@@ -240,30 +249,6 @@
                 <div class="bg-yellow-400/20 px-6 py-2 rounded-full border border-yellow-400/40 whitespace-nowrap">
                   <span class="text-yellow-400 font-black text-[10px] uppercase tracking-widest">Cam kết làm được sản phẩm</span>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Idea Generator -->
-    <section class="py-24">
-        <div class="container mx-auto px-6">
-            <div id="idea-generator" class="glass-panel p-10 lg:p-14 rounded-[3rem] border border-primary/20 max-w-5xl mx-auto shadow-[0_0_50px_rgba(217,70,239,0.1)] relative overflow-hidden group">
-                <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[80px] pointer-events-none group-hover:bg-primary/10 transition-all"></div>
-                <div class="flex flex-col items-center text-center mb-12 relative z-10">
-                  <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center border border-primary/30 mb-6 shadow-neon animate-pulse-glow">
-                    <span class="material-icons-round text-primary text-4xl">auto_fix_high</span>
-                  </div>
-                  <h2 class="text-3xl lg:text-4xl font-black text-white uppercase italic tracking-tight leading-none mb-4">Sáng tạo Ý tưởng với Gemini AI</h2>
-                  <p class="text-gray-400 max-w-2xl text-lg font-medium">Trải nghiệm sức mạnh của AI ngay lập tức. Nhập chủ đề của bạn để nhận gợi ý content "triệu view".</p>
-                </div>
-                <div class="flex flex-col sm:flex-row gap-5 mb-14 relative z-10">
-                  <input id="niche-input" type="text" placeholder="Ví dụ: Mỹ phẩm sạch, Đồ ăn vặt, Bất động sản..." class="form-input flex-grow text-lg py-5 px-8 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10" />
-                  <button id="gen-btn" class="bg-primary hover:bg-pink-600 text-white px-10 py-5 rounded-2xl font-black transition-all shadow-neon flex items-center justify-center gap-3 text-lg uppercase tracking-wider whitespace-nowrap">
-                    <span>Gợi ý ngay</span>
-                    <span class="material-icons-round">rocket_launch</span>
-                  </button>
-                </div>
-                <div id="ideas-result" class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10"></div>
             </div>
         </div>
     </section>
@@ -354,20 +339,8 @@
     </div>
 
     <!-- SCRIPTS -->
-    <script type="importmap">
-{
-  "imports": {
-    "@google/genai": "https://esm.sh/@google/genai@^1.39.0",
-    "react": "https://esm.sh/react@^19.2.4",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "react/": "https://esm.sh/react@^19.2.4/"
-  }
-}
-</script>
     <script type="module">
-        import { GoogleGenAI, Type } from "@google/genai";
-
-        // Constants from constants.tsx
+        // Roadmap Data
         const ROADMAP_DATA = [
           { id: '1', step: '01', title: 'Tư duy AI Media', icon: 'psychology', desc: 'Thiết lập mindset và hiểu rõ bức tranh toàn cảnh.' },
           { id: '2', step: '02', title: 'Bậc thầy Prompt', icon: 'chat', desc: 'Kỹ thuật viết câu lệnh chuyên sâu.' },
@@ -426,58 +399,10 @@
                     </div>
                     <div class="flex items-end gap-1"><span class="price-text font-black text-white tracking-tighter">${plan.new}</span><span class="text-gray-500 text-[9px] font-black uppercase whitespace-nowrap pb-1">/ NGƯỜI</span></div>
                   </div>
-                  <button class="w-full mt-auto py-5 rounded-[1.8rem] font-black text-sm transition-all uppercase tracking-tighter ${plan.isHot ? 'bg-gradient-to-r from-red-500 to-purple-600 text-white hover:scale-105' : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'}">${plan.id==='combo'?'HÃY ĐĂNG KÝ NGAY':'Đăng ký ngay →'}</button>
+                  <button onclick="document.getElementById('register').scrollIntoView()" class="w-full mt-auto py-5 rounded-[1.8rem] font-black text-sm transition-all uppercase tracking-tighter ${plan.isHot ? 'bg-gradient-to-r from-red-500 to-purple-600 text-white hover:scale-105' : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'}">${plan.id==='combo'?'HÃY ĐĂNG KÝ NGAY':'Đăng ký ngay →'}</button>
                 </div>
             `;
             pricingGrid.appendChild(div);
-        });
-
-        // Gemini AI Logic
-        const nicheInput = document.getElementById('niche-input');
-        const genBtn = document.getElementById('gen-btn');
-        const resultDiv = document.getElementById('ideas-result');
-
-        genBtn.addEventListener('click', async () => {
-            const niche = nicheInput.value;
-            if (!niche) return;
-            genBtn.disabled = true;
-            genBtn.innerHTML = '<span class="material-icons-round animate-spin">sync</span>';
-            resultDiv.innerHTML = "";
-
-            try {
-                const ai = new GoogleGenAI({ apiKey: "AIza..." }); // process.env.API_KEY
-                const response = await ai.models.generateContent({
-                  model: 'gemini-3-flash-preview',
-                  contents: `Gợi ý 3 ý tưởng video ngắn cho: ${niche}. Trả về JSON: [{title, content, aiTip}]`,
-                  config: {
-                    responseMimeType: "application/json",
-                    responseSchema: {
-                      type: Type.ARRAY,
-                      items: {
-                        type: Type.OBJECT,
-                        properties: { title: { type: Type.STRING }, content: { type: Type.STRING }, aiTip: { type: Type.STRING } }
-                      }
-                    }
-                  }
-                });
-                const ideas = JSON.parse(response.text);
-                ideas.forEach((idea, idx) => {
-                    resultDiv.innerHTML += `
-                        <div class="glass-panel bg-white/5 p-8 rounded-3xl border border-white/10 hover:border-primary/40 transition-all hover:-translate-y-2 group">
-                          <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4 border border-primary/20"><span class="text-primary font-black">${idx + 1}</span></div>
-                          <h4 class="text-white font-black text-xl mb-3">${idea.title}</h4>
-                          <p class="text-gray-400 text-sm mb-6 leading-relaxed font-medium">${idea.content}</p>
-                          <div class="bg-blue-500/10 p-4 rounded-xl border border-blue-500/20 text-xs text-blue-200 font-bold">💡 AI Tip: ${idea.aiTip}</div>
-                        </div>
-                    `;
-                });
-            } catch (err) {
-                console.error(err);
-                resultDiv.innerHTML = "<p class='text-red-400'>Lỗi AI. Vui lòng thử lại.</p>";
-            } finally {
-                genBtn.disabled = false;
-                genBtn.innerHTML = '<span>Gợi ý ngay</span><span class="material-icons-round">rocket_launch</span>';
-            }
         });
 
         // Timer Logic

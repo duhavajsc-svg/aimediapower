@@ -1,7 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { ROADMAP_DATA, PRICING_DATA, INSTRUCTORS, EXCLUSIVE_BENEFITS, STUDENT_SUCCESS_GALLERY } from './constants';
-import IdeaGenerator from './components/IdeaGenerator';
+import { ROADMAP_DATA, PRICING_DATA, INSTRUCTORS, EXCLUSIVE_BENEFITS } from './constants';
 
 const App: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState({ h: 5, m: 42, s: 18 });
@@ -31,7 +29,7 @@ const App: React.FC = () => {
       <nav className="fixed top-0 w-full z-50 glass-panel border-b border-white/10 h-16 flex items-center justify-between px-4 lg:px-12">
         <div className="flex items-center gap-2">
           <span className="material-icons-round text-primary text-2xl lg:text-3xl">auto_awesome</span>
-          <span className="font-bold text-lg lg:text-xl tracking-wider text-white uppercase whitespace-nowrap">AI MEDIA <span className="text-primary italic">Power</span></span>
+          <span className="font-bold text-lg lg:text-xl tracking-wider text-white uppercase whitespace-nowrap">AI MEDIA <span class="text-primary italic">Power</span></span>
         </div>
         <div className="hidden md:flex gap-4 lg:gap-8 text-[10px] font-black uppercase tracking-widest text-gray-400">
           <a className="hover:text-white transition-colors whitespace-nowrap" href="#hero">Trang chủ</a>
@@ -140,7 +138,7 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Pricing Section - Optimized to prevent text overflow */}
+      {/* Pricing Section */}
       <section className="py-24 bg-background-dark relative" id="pricing">
         <div className="container mx-auto px-6 lg:px-12 max-w-7xl">
           <div className="text-center mb-16 lg:mb-20">
@@ -256,13 +254,6 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Idea Generator */}
-      <section className="py-24">
-        <div className="container mx-auto px-6">
-          <IdeaGenerator />
-        </div>
-      </section>
-
       {/* Registration Section */}
       <section className="py-32 bg-background-dark relative overflow-hidden" id="register">
         <div className="container mx-auto px-6 lg:px-12 relative z-10 max-w-7xl">
@@ -323,7 +314,7 @@ const App: React.FC = () => {
              <div className="space-y-6 max-w-md">
                 <div className="flex items-center justify-center lg:justify-start gap-3">
                   <span className="material-icons-round text-primary text-4xl lg:text-5xl">auto_awesome</span>
-                  <span className="font-black text-3xl lg:text-4xl tracking-tighter text-white uppercase italic whitespace-nowrap">AI Media <span className="text-primary">Power</span></span>
+                  <span className="font-black text-3xl lg:text-4xl tracking-tighter text-white uppercase italic whitespace-nowrap">AI Media <span class="text-primary">Power</span></span>
                 </div>
                 <p className="text-gray-500 font-medium text-base lg:text-lg leading-relaxed text-balance">Hệ thống đào tạo AI thực chiến hàng đầu Việt Nam. Khai phóng tiềm năng sáng tạo không giới hạn.</p>
              </div>
@@ -373,12 +364,6 @@ const App: React.FC = () => {
                   </React.Fragment>
                 ))}
               </div>
-            </div>
-            <div className="hidden lg:flex items-center -space-x-3">
-              {INSTRUCTORS.slice(0, 3).map((ins, i) => (
-                <img key={i} src={ins.image} alt="User" className="w-10 h-10 lg:w-12 lg:h-12 rounded-full border-4 border-[#1a1c26] object-cover" />
-              ))}
-              <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/10 border-4 border-[#1a1c26] flex items-center justify-center text-[8px] lg:text-[10px] font-black text-white backdrop-blur-md">+2k</div>
             </div>
           </div>
           <div className="flex items-center gap-6 lg:gap-8 w-full sm:w-auto">
