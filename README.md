@@ -1,29 +1,19 @@
+
 # AI Media Power Landing Page (Static Masterpiece)
 
-Trang giới thiệu khóa học AI Media Power phiên bản tĩnh (static), tối ưu hóa tuyệt đối cho tốc độ tải và khả năng hiển thị trên mọi thiết bị.
+Trang giới thiệu khóa học AI Media Power phiên bản tĩnh (static), tối ưu hóa tuyệt đối cho tốc độ tải và khả năng hiển thị.
 
 ## Đặc điểm nổi bật
-- **Single-file Architecture**: Toàn bộ mã nguồn nằm gọn trong `index.html`. Không build step, không dependency phức tạp.
-- **Ultra-Fast**: Tải trang tức thì nhờ sử dụng Tailwind CSS CDN và tối ưu hóa tài nguyên.
-- **Glassmorphism UI**: Thiết kế hiện đại với hiệu ứng kính mờ và gradient nghệ thuật.
-- **Responsive**: Hiển thị hoàn hảo trên Desktop, Tablet và Mobile.
-- **No Dependencies**: Không cần Node.js, Vite hay React. Chỉ cần mở file là chạy.
-
-## Cấu trúc thư mục
-- `/index.html`: File duy nhất chứa toàn bộ code.
-- `/README.md`: Hướng dẫn này.
-- `/metadata.json`: Cấu hình meta cho ứng dụng.
+- **Zero Build Step**: Chỉ HTML/CSS/JS thuần, mở file là chạy.
+- **Fixed UI**: Bố cục bảng giá được fix triệt để lỗi tràn chữ và rớt khung.
+- **Dynamic AI**: Tích hợp Gemini 2.5 Flash thông qua Vanilla JS Module.
+- **Ultra Responsive**: Sử dụng `clamp()` font-size cho các tiêu đề quan trọng.
 
 ## Hướng dẫn triển khai lên Vercel
-1. Đẩy mã nguồn lên repository GitHub của bạn.
+1. Đẩy mã nguồn (index.html, README.md, metadata.json) lên repository GitHub.
 2. Truy cập [vercel.com](https://vercel.com) và chọn **Add New Project**.
 3. Import repository từ GitHub.
 4. Tại mục **Framework Preset**, chọn **Other**.
-5. Đảm bảo **Build Command** và **Output Directory** để trống.
-6. Nhấn **Deploy**.
-
-## Chỉnh sửa & Phát triển
-Bạn có thể chỉnh sửa trực tiếp nội dung trong file `index.html`. Sử dụng công nghệ:
-- **Tailwind CSS**: Chỉnh sửa class ngay trong HTML.
-- **Material Icons**: Thay đổi icon bằng cách thay đổi text trong thẻ span.
-- **Vanilla JS**: Chỉnh sửa logic đếm ngược hoặc scroll ở cuối file.
+5. Đảm bảo các trường **Build Command** và **Output Directory** để trống.
+6. Vào **Environment Variables**, thêm `API_KEY` (Key của bạn từ Google AI Studio).
+7. Nhấn **Deploy**.
