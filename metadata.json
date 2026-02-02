@@ -1,0 +1,8 @@
+{
+  "name": "AI Media Power Landing Page",
+  "description": "A high-conversion landing page for an AI Media masterclass, featuring course roadmaps, pricing, and a Gemini-powered content idea generator.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
