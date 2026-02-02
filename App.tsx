@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ROADMAP_DATA, PRICING_DATA, INSTRUCTORS } from './constants';
 
@@ -86,7 +85,7 @@ const App: React.FC = () => {
           <div className="relative h-[400px] lg:h-[600px] flex items-center justify-center">
             <div className="relative w-full h-full">
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-48 lg:w-96 lg:h-72 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-2xl z-20 animate-float border-2 border-white/30 flex items-center justify-center overflow-hidden">
-                <img alt="Abstract fluid art" className="w-full h-full object-cover opacity-80 mix-blend-overlay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq2YdXOIRljKGEI0eh4mBsucM1tFTEKhyOG7E1y5T7TmYGDjiHP7UkMYbnjMLuNKShzDA95II5QicPLJW8a8s-6yShefvHB5XfDyWOveIxtsviks5yxFUCaVQ3o4r5f_S0vPxvDlSz2rWStsrFO5_7sp7xgYMjI4OAqb4IMAKt7rodvyymKSmmZR298h-w7cNhYkB9zTvT5MGksBbya6RldF2VKzXeXw5ruYedtVeO1s0KVmOdPhAqsqY9wPevH8nD8byE_pj1gKI" />
+                <img alt="AI Media Power Explosion" className="w-full h-full object-cover opacity-80 mix-blend-overlay" src="https://i.postimg.cc/PrKVC1t8/Thiet-ke-chua-co-ten-(13).png" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 <span className="material-icons-round text-6xl text-white drop-shadow-lg z-30">play_circle_filled</span>
               </div>
