@@ -16,6 +16,12 @@ export const ROADMAP_DATA: RoadmapItem[] = [
   { id: '12', step: '12', title: 'TỐT NGHIỆP', description: 'Dự án thực tế & Chứng nhận Chuyên gia AI Media toàn diện.', icon: 'check_circle', isActive: true, isSpecial: true },
 ];
 
+export const EXCLUSIVE_BENEFITS = [
+  { title: 'Học lại miễn phí', desc: 'Học đi học lại online trong 1 năm để cập nhật kiến thức mới.', icon: 'all_inclusive', color: 'text-blue-400' },
+  { title: 'Xem lại Record', desc: 'Video quay lại từng buổi học, không lo mất bài hay bỏ lỡ.', icon: 'lock', color: 'text-purple-400' },
+  { title: 'Hỗ trợ 1-1', desc: 'Qua Zalo/Telegram/Group kín 24/7 giải đáp mọi thắc mắc.', icon: 'forum', color: 'text-teal-400' },
+];
+
 export const PRICING_DATA: PricingPlan[] = [
   {
     id: 'work',
@@ -26,12 +32,7 @@ export const PRICING_DATA: PricingPlan[] = [
     discount: '-78%',
     lessons: 10,
     weeks: 3,
-    features: [
-      'Giảng viên thực chiến từ tập đoàn lớn',
-      '10 bài học mỗi 3 tuần',
-      'Nội dung được cập nhật hàng tháng',
-      'Cấp chứng nhận viên IHRAI'
-    ],
+    features: ['Giảng viên thực chiến', '10 bài học mỗi 3 tuần'],
     colorClass: 'teal-accent',
     buttonLabel: 'Đăng ký ngay →'
   },
@@ -44,12 +45,7 @@ export const PRICING_DATA: PricingPlan[] = [
     discount: '-74%',
     lessons: 12,
     weeks: 4,
-    features: [
-      'Giảng viên thực chiến từ tập đoàn lớn',
-      '12 bài học mỗi 4 tuần',
-      'Chuyên sâu Media & Sáng tạo nội dung',
-      'Cấp chứng nhận viên IHRAI'
-    ],
+    features: ['12 bài học mỗi 4 tuần', 'Chuyên sâu Media'],
     colorClass: 'orange-accent',
     buttonLabel: 'Đăng ký ngay →'
   },
@@ -62,12 +58,7 @@ export const PRICING_DATA: PricingPlan[] = [
     discount: '-83%',
     lessons: 22,
     weeks: 7,
-    features: [
-      'Toàn bộ quyền lợi của 2 lộ trình',
-      '22 bài học chuyên sâu',
-      'Nội dung cập nhật mới suốt 1 năm',
-      'Ưu tiên hỗ trợ 1:1 từ đội ngũ'
-    ],
+    features: ['Quyền lợi của 2 lộ trình', 'Ưu tiên hỗ trợ 1:1'],
     colorClass: 'red-accent',
     buttonLabel: 'HÃY ĐĂNG KÝ NGAY',
     isHot: true
@@ -76,31 +67,42 @@ export const PRICING_DATA: PricingPlan[] = [
 
 export const INSTRUCTORS: Instructor[] = [
   {
-    name: 'Anh Tuấn',
-    role: 'Chuyên gia / Giảng viên',
+    name: 'Tuân AI',
+    role: 'Founder AI Master',
     quote: 'Kiến thức thực tế, áp dụng được ngay vào doanh nghiệp.',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCLkUa3f_7WsQ2mC_UZZdMwzPhfSIyB9D7gqcwdC38ngH_3va98HozNR-XX5FR1f6pqh8QGRzshw_fkTzP7XrrVSSyoIxnplNt1_QNbmGTANCFl6kgDrdXpFqvN_i_YEqwnrjn83kV2l1gECnrm1RCmxZ4wFkNw269M1GggsL89Cj_C1vxcLQfTgLtwJEv_ucmNfVjBfIxjAEJGDROdBnkzH-HTohAxnk9Tyao9eKeq7QMXrJ-JcdbtusjgrBIM362uX3Vko4rDPFA',
-    gradient: 'from-orange-400 to-pink-500'
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBhajMyTIIp9MEHPnS1l-KFTGvwgyH1aAUfK5LmkEZoha3ypCkqqpi_x6-dQtsKrj4gMUgMwAOso2cPr6nT1HugKBHzHoOclrdloXGHg-WFOTlMui3tuhWBDu-yUHrZLp4k8xxVGTICWzzavCbOQEgRzAX4UEpf8C34RjP_X1jy01v-FydmQHtPatGnx8cX1ArLHUj2FjEP9UpZbPSzxWD2_ZZ2J73pOoGgCUv1lxJ31hQvx4RgcRxfYAAnt9qkVp69rEeJVFokyZ0',
+    gradient: 'from-blue-500 to-purple-500',
+    specialty: 'AI ART'
   },
   {
-    name: 'Anh Huy',
-    role: 'Chuyên gia / Giảng viên',
+    name: 'Huy Editor',
+    role: 'Head of Media',
     quote: 'Biến AI thành trợ lý đắc lực nhất của bạn.',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuANG-6CsXq4enDfcrKg-JW7yAkZlQAOZU_NDc02gskzcLJeYpD27SFS6wVakBm7KKPlK6nx46YCU2AX_frXQ4wNQ747ayTQhDKhc_1BZ77mCnhg_bd65MzijUpHX2QcmtWmY7UDn2fKVCmLRqqJ4RPS7B-lKtPZo1lJqhw13FzwG6B0dJp6u6tsVqyHtlsW_Qt7QlDO7inbZ0Jv-JmyZdb2D7aXJZmSjNXdhwrx2lK-jf0gTwRyaINtjahC883lkwjaSxoB9hkWhX4',
-    gradient: 'from-blue-400 to-purple-500'
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCY5zIHHlItoIZ4zXdZESH3OFJ_AnxTalPC1EaLshsnUN6fRMa7BlUOAf_AwTmHM7z-OVW7g7FoYgtOg-R7uHzrtl1JDfnmShrSmQ6zcQ16FRW2MPT91TxdJyJo8R_yWYuNal9pmYCo-8ydwlTwEVwQtX5RqUYfGtwdSSCdxEFagAYeVLLE2vXZtFPvGgs0Tir04DFyxYB061uWZ981IqVFFMSaSZ5AwafhKEbzcnRzugY4v3vQlKm4MNPbMuRj_wKq45wYbxIfQXM',
+    gradient: 'from-orange-500 to-red-500',
+    specialty: 'VIDEO'
   },
   {
-    name: 'Anh Hưng',
-    role: 'Chuyên gia / Giảng viên',
+    name: 'Hưng Sound',
+    role: 'Music Producer',
     quote: 'Tư duy làm chủ công cụ mới là cốt lõi.',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAyN5PR7qD0yVJDK-JeXBhKUP6TZMJLSJ0od7ONLYzkmD857OU6fERgVSh95NXymszjIAEAZO4ScTv8eduBuLkejJyKmKNlN-MrzxasoCu6BAVU6yzlKYS2Zh-e0cq5Ybq8Je4AfgO2POE4YlsBudivTdlWrFF6t4xDfuvBBaN64mWaRuB8C-EDsbxcZxi0iqVpoFOqIsLjwKGCJUswc0rj6v64qYV5bCfRvbdsaFKAWVf_l0vfDfGZS9fMAQdlHZNQcErtED8Upi0',
-    gradient: 'from-green-400 to-teal-500'
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBRPfzDe37E4qkTNelvkQxmvBAYMj9D48zHbZR2oxxd7uFXXlMjNI7mE7Gj-UGT_6mbQGCjyShsbtN__aRn9adDrI1dsDY5N-fGAvRQiypZ9-rvf7OBcifRZi7TAQhMBWQfOPtNXiz8ZS73mdsV3s-cOHXeOdoEX620lzs8ySXjsKEwSUCJoVSrG_kxYP3xUJutjeZAofCH-gukHjBWUw44jvq7_Y5lL4fTxFt-JcTVJPfuaVCBwvf0PmrxQm3zZLwvvNM_s1l-Pm8',
+    gradient: 'from-green-400 to-emerald-600',
+    specialty: 'MUSIC'
   },
   {
-    name: 'Anh Đạt',
-    role: 'Chuyên gia / Giảng viên',
+    name: 'Đạt Dev',
+    role: 'Automation Expert',
     quote: 'Sáng tạo không giới hạn cùng AI.',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCO9dYrpLLB6mcbaegwahMv3f2mxYkqS6oQVAKxS7DglHcOUZyDO9S8rHwFS4i1N3Bx82AbViK6lA1m421VM94Lx7OZ3h8-mJQJ55svWJoDKXUgbN5yMBN5ZnDGHRa4BIgkmlNFMeRiFvSX8NkszLGldMPOErW_a5Z8WYwTLICpD6Mls7etJ0WilxL3SFayzsGN0WARgUSHJJQbL05MQJsZNfUd0WEEyo_B0NLZAcoHnqx4ldNKtM9xs8vAJYzpdh3G23LUMlIu9WA',
-    gradient: 'from-red-400 to-yellow-500'
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuALC5qHgfO0zppKrgLIJgKyUkqcFXyIvBbNftQNnjAxE8uYwV2ndfRKI58MpC3qpet5QUqV5AfxoN7dlE3hFy5YjP9GHf9guuQ3r_3KdVJvsL1cH-qC7KwRfhMJv_DOkvY2hcR8xGitFsFeXIEyb3RTNQX0y2knSnuC39l5q7LdNz5cwrl2_7KUbJjiy2eeu7M6vJOobeMz6SlKS_TXFuOqAasAQA4UW6GjoiZlac8i1kHtwLJMxlJyKlMNULZgwbqQe7PuAmRobOQ',
+    gradient: 'from-purple-500 to-pink-500',
+    specialty: 'AUTO'
   }
+];
+
+export const STUDENT_SUCCESS_GALLERY = [
+  'https://lh3.googleusercontent.com/aida-public/AB6AXuBwmzHKWEX60R58IbtiupPnI8Rp-hLRkXlozAwFdLN_XVOULqRQm8971b_oNS1g1zAroVIEFAJnXvkkVPCk2u9pY9YeBMk22yKEdg8kBMvu3u7kxD6HcdwA8KV1GDhW6mwUgNp0zFQkfG51SYZeirbI8a6bUfrmMAe41iDx7oe0hQ-3AyaYNQfNwv_MMJi3knLbVx1ZJOHyy_1COHwE15EFSOLCjYzXI8geAEp-9CsvpQb3iYqdvzHd3GF5wL6F0yjrsG1oV6CH3kc',
+  'https://lh3.googleusercontent.com/aida-public/AB6AXuAoijEMeqC6tAX0VSiB2pKp3yFOgWXVFCty-5GyOAiapX5OhxNwYj_ltH1OSXmCGelxfV7JskMBr1NUX9dL8Y0Eyq_BJQxbZEIcvwkNCTnyUCGwMKQHZXHL4w5N7RxEDHj26All8ldx__lcyv-YVe6Uvzecri0nJ4IOjG8B3izHocfwfruuXDSKrXSKH_PPrL94hBkr2Hf5ty-yJ9DpNmIMbZ7NmpWeyBlxmkPrzmKc670w5ZTZCFpzTM_fYaJpbSQZAmeLU5zQ_rg',
+  'https://lh3.googleusercontent.com/aida-public/AB6AXuC4g8ypT4V7r2Kusy9Fx1-oD7UNJDkSHygjz0vA2nNHOcF5Ki-bpSFyXDV0jTShvOevzj4QYi8Yg_mC7pkfOyZw4hvDQwKIUDvr_QBtWuNR99Gu7_tJhXsd3W1Rs-HYWyu6jy0hwyJI3pha4oQsSv6nEqQXNzsRwqs6VT6Em-XA7p1qAFxj8tpskJPpYlSO4XmfcLzR0cIaVLDa0yzjFE1oZrr2Y-9Gk8S7Lal01SrAwBLRCdKlKqesyEE8stlP_C4N_rTI06N9mCU',
+  'https://lh3.googleusercontent.com/aida-public/AB6AXuC2F6jzwS2OyNDOXK7reQTYqZERMbaerFedxzDKMK9Mf4wTRYy1aHxmBimBxd5qDwEGYqkcGIj3-cLHcwgYuIaMROP_j2rQuNPXTzM6-dZpAWqbhlWCsYzZBBRIUgudroYMDQvi7Jg2GpUnzaJkZGML2epbt8uADdp-emg0Y9n_Z-63sDxWOlcoh_ILa1yJMNXohL2MepPUj1w_x4-qDWU7kC4tNMHryyGiymiEPYHAc30zxFjXxSr9wR46DTEM4BqL_rYDot3YQnI'
 ];

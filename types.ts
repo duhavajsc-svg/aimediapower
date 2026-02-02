@@ -30,4 +30,5 @@ export interface Instructor {
   quote: string;
   image: string;
   gradient: string;
+  specialty: string;
 }
