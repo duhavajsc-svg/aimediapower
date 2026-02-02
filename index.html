@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi" class="scroll-smooth">
 <head>
@@ -6,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Media Power - Khai Phóng Sức Mạnh Sáng Tạo</title>
     
-    <!-- Tailwind CSS & Plugins -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
     
     <!-- Fonts & Icons -->
@@ -25,7 +24,7 @@
                         primary: "#D946EF", 
                         secondary: "#3B82F6", 
                         "background-dark": "#0F172A", 
-                        "dark-blue": "#141824",
+                        "dark-blue": "#0a0f1d",
                         "accent-purple": "#a855f7",
                         "teal-accent": "#14b8a6",
                         "orange-accent": "#f97316",
@@ -36,6 +35,18 @@
                         'hero-gradient': 'linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #4c1d95 100%)',
                         'neon-button': 'linear-gradient(90deg, #3B82F6 0%, #D946EF 100%)',
                         'pink-button': 'linear-gradient(90deg, #ec4899 0%, #be185d 100%)',
+                    },
+                    animation: {
+                      'float': 'float 6s ease-in-out infinite',
+                      'float-delayed': 'float 7s ease-in-out infinite 1s',
+                      'pulse-glow': 'pulse-glow 3s infinite',
+                    },
+                    keyframes: {
+                      float: { '0%, 100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-15px)' } },
+                      'pulse-glow': {
+                        '0%, 100%': { opacity: '0.4', boxShadow: '0 0 15px rgba(59, 130, 246, 0.3)' },
+                        '50%': { opacity: '1', boxShadow: '0 0 30px rgba(217, 70, 239, 0.5)' },
+                      }
                     }
                 },
             },
@@ -45,40 +56,20 @@
     <style type="text/tailwindcss">
         @layer components {
             .glass-panel {
-                @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             }
-            .text-glow {
-                text-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
-            }
-            .animate-float {
-                animation: float 6s ease-in-out infinite;
-            }
-            @keyframes float {
-                0%, 100% { transform: translateY(0px); }
-                50% { transform: translateY(-15px); }
+            .text-glow { text-shadow: 0 0 15px rgba(168, 85, 247, 0.6); }
+            .form-input {
+                @apply w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-primary focus:bg-white/10 outline-none transition-all font-medium;
             }
         }
-        body { background: #0F172A; color: #f1f5f9; }
-        .form-input {
-            @apply w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-primary focus:bg-white/10 outline-none transition-all font-medium;
-        }
-        /* Fix rớt chữ đặc biệt cho giá tiền */
-        .price-text {
-            font-size: clamp(1.75rem, 5vw, 2.75rem);
-            line-height: 1;
-            white-space: nowrap;
-        }
+        body { background: #0F172A; color: #f1f5f9; overflow-x: hidden; }
+        .price-text { font-size: clamp(1.75rem, 5vw, 2.75rem); white-space: nowrap; }
     </style>
-<script type="importmap">
-{
-  "imports": {
-    "@google/genai": "https://esm.sh/@google/genai@^1.39.0",
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
-  }
-}
-</script>
 </head>
 <body class="antialiased selection:bg-primary selection:text-white">
 
@@ -90,53 +81,105 @@
         </div>
         <div class="hidden md:flex gap-4 lg:gap-8 text-[10px] font-black uppercase tracking-widest text-gray-400">
             <a class="hover:text-white transition-colors" href="#hero">Trang chủ</a>
+            <a class="hover:text-white transition-colors" href="#roadmap">Lộ trình</a>
+            <a class="hover:text-white transition-colors" href="#exclusive-benefits">Quyền lợi</a>
             <a class="hover:text-white transition-colors" href="#pricing">Học phí</a>
-            <a class="hover:text-white transition-colors" href="#register">Đăng ký</a>
         </div>
-        <button onclick="document.getElementById('register').scrollIntoView()" class="bg-primary hover:bg-pink-600 text-white px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-wider shadow-neon transition-all transform hover:scale-105">
+        <button onclick="document.getElementById('register').scrollIntoView()" class="bg-primary hover:bg-pink-600 text-white px-4 lg:px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-wider shadow-neon transition-all transform hover:scale-105">
             Đăng Ký Ngay
         </button>
     </nav>
 
-    <!-- Hero -->
+    <!-- Hero Section -->
     <header id="hero" class="relative pt-32 pb-20 lg:pt-48 lg:pb-40 px-6 lg:px-12 overflow-hidden bg-hero-gradient">
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[120px] animate-float"></div>
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] animate-float-delayed"></div>
         <div class="container mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
             <div class="space-y-8 text-center lg:text-left">
-                <h1 class="text-4xl lg:text-7xl font-black leading-[1.1] text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-white to-pink-300 drop-shadow-lg uppercase tracking-tighter">
-                    AI MEDIA POWER - <br /><span class="text-white text-glow">Khai Phóng Sức Mạnh</span>
+                <h1 class="text-4xl sm:text-5xl lg:text-7xl font-black leading-[1.1] text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-white to-pink-300 drop-shadow-lg uppercase tracking-tighter">
+                    AI MEDIA POWER - <br /><span class="text-white text-glow">Khai Phóng Sức Mạnh Sáng Tạo</span>
                 </h1>
-                <p class="text-lg text-gray-300 max-w-xl border-l-4 border-primary pl-6 leading-relaxed mx-auto lg:mx-0 font-medium italic">
-                    Làm đồ họa & video: NHANH - ĐẸP - CHẤT mà không cần chuyên môn sâu.
+                <p class="text-base lg:text-lg text-gray-300 max-w-xl border-l-4 border-primary pl-6 leading-relaxed mx-auto lg:mx-0 font-medium italic">
+                    Dành cho Bạn và Doanh nghiệp muốn làm đồ họa & video: <br />
+                    <span class="font-black text-white italic">NHANH - ĐẸP - CHẤT</span> mà không cần chuyên môn sâu.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
-                    <button class="bg-neon-button text-white px-8 py-5 rounded-2xl font-black shadow-neon hover:scale-105 transition-all uppercase tracking-tighter">ĐĂNG KÝ NHẬN ƯU ĐÃI</button>
-                    <button class="glass-panel text-gray-300 px-8 py-5 rounded-2xl font-bold hover:bg-white/10 transition-all">Xem Khóa học</button>
+                <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
+                    <button class="bg-neon-button text-white px-8 lg:px-10 py-4 lg:py-5 rounded-2xl font-black shadow-neon hover:scale-105 transition-all uppercase tracking-tighter">
+                        ĐĂNG KÝ NHẬN ƯU ĐÃI <span class="material-icons-round align-middle ml-1">bolt</span>
+                    </button>
+                    <button class="glass-panel text-gray-300 px-6 lg:px-8 py-4 lg:py-5 rounded-2xl font-bold hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
+                        <span class="material-icons-round text-yellow-400">play_circle</span> Khóa học thực chiến
+                    </button>
                 </div>
             </div>
-            <div class="relative flex justify-center animate-float">
-                <img src="https://i.postimg.cc/PrKVC1t8/Thiet-ke-chua-co-ten-(13).png" alt="Hero" class="w-full max-w-lg rounded-3xl shadow-2xl border-2 border-white/20" />
+            <div class="relative animate-float">
+                <img src="https://i.postimg.cc/PrKVC1t8/Thiet-ke-chua-co-ten-(13).png" alt="Hero" class="w-full max-w-lg mx-auto rounded-3xl shadow-2xl border-2 border-white/20" />
             </div>
         </div>
     </header>
 
-    <!-- Pricing Section (Fixed Overflow) -->
+    <!-- Target Audience (5 Cards) -->
+    <section class="py-24 bg-background-dark relative overflow-hidden">
+        <div class="container mx-auto px-6 lg:px-12 text-center mb-16">
+            <h2 class="text-3xl lg:text-5xl font-black text-white uppercase tracking-tight text-glow">KHOÁ HỌC NÀY <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 italic">DÀNH CHO AI?</span></h2>
+        </div>
+        <div class="container mx-auto px-6 lg:px-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            <div class="glass-panel p-8 rounded-[2rem] text-center border-white/5 hover:border-white/20 transition-all flex flex-col items-center">
+                <span class="material-symbols-outlined text-6xl text-blue-400 mb-6 drop-shadow-2xl">apartment</span>
+                <h3 class="text-white font-black text-base uppercase tracking-tighter mb-3">Doanh nghiệp</h3>
+                <p class="text-gray-400 text-xs font-medium">Tối ưu hóa phòng Media, truyền thông chuyên nghiệp.</p>
+            </div>
+            <div class="glass-panel p-8 rounded-[2rem] text-center border-white/5 hover:border-white/20 transition-all flex flex-col items-center">
+                <span class="material-symbols-outlined text-6xl text-purple-400 mb-6 drop-shadow-2xl">laptop_mac</span>
+                <h3 class="text-white font-black text-base uppercase tracking-tighter mb-3">Nhân viên VP</h3>
+                <p class="text-gray-400 text-xs font-medium">Cần công cụ sáng tạo nội dung nhanh gọn cho công việc.</p>
+            </div>
+            <div class="glass-panel p-8 rounded-[2rem] text-center border-white/5 hover:border-white/20 transition-all flex flex-col items-center">
+                <span class="material-symbols-outlined text-6xl text-teal-400 mb-6 drop-shadow-2xl">palette</span>
+                <h3 class="text-white font-black text-base uppercase tracking-tighter mb-3">Designer/ Media</h3>
+                <p class="text-gray-400 text-xs font-medium">Nâng cấp quy trình sáng tạo, làm chủ các công cụ AI.</p>
+            </div>
+            <div class="glass-panel p-8 rounded-[2rem] text-center border-white/5 hover:border-white/20 transition-all flex flex-col items-center">
+                <span class="material-symbols-outlined text-6xl text-orange-400 mb-6 drop-shadow-2xl">school</span>
+                <h3 class="text-white font-black text-base uppercase tracking-tighter mb-3">Giảng viên</h3>
+                <p class="text-gray-400 text-xs font-medium">Làm bài giảng, slide, video giáo dục thu hút hấp dẫn.</p>
+            </div>
+            <div class="glass-panel p-8 rounded-[2rem] text-center border-white/5 hover:border-white/20 transition-all flex flex-col items-center">
+                <span class="material-symbols-outlined text-6xl text-red-400 mb-6 drop-shadow-2xl">shopping_cart</span>
+                <h3 class="text-white font-black text-base uppercase tracking-tighter mb-3">KD Online</h3>
+                <p class="text-gray-400 text-xs font-medium">Tự xây kênh, làm hình ảnh bán hàng tiết kiệm chi phí.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Master List -->
+    <section id="roadmap" class="py-24 bg-[#0a0f1d]">
+        <div class="container mx-auto px-6 lg:px-12 max-w-7xl">
+            <div class="text-center mb-16">
+                <span class="text-orange-accent font-black tracking-[0.3em] text-[10px] uppercase mb-4 block">LỘ TRÌNH CHUYÊN SÂU</span>
+                <h2 class="text-4xl lg:text-6xl font-black text-white uppercase tracking-tighter">MASTERING AI <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">FOR MEDIA</span></h2>
+            </div>
+            <div id="roadmap-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Roadmap items will be injected by script for speed but kept as static HTML for fallback -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
     <section id="pricing" class="py-24 bg-background-dark">
         <div class="container mx-auto px-6 lg:px-12 max-w-7xl">
             <div class="text-center mb-16">
                 <span class="px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black tracking-[0.2em] uppercase">BẢNG GIÁ KHÓA HỌC</span>
-                <h2 class="text-4xl lg:text-6xl font-black text-white mt-6 uppercase tracking-tighter italic">Unleash <span class="text-primary">Creativity</span></h2>
+                <h2 class="text-4xl lg:text-6xl font-black text-white mt-4 uppercase italic">Master AI. <span class="text-primary">Unleash Creativity.</span></h2>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Plan 1 -->
-                <div class="relative glass-panel rounded-[2.5rem] p-8 lg:p-10 flex flex-col hover:border-white/30 transition-all group">
-                    <div class="flex justify-between items-center mb-6">
+                <div class="glass-panel rounded-[2.5rem] p-10 flex flex-col border-white/5 hover:border-white/20 transition-all">
+                    <div class="flex justify-between items-center mb-8">
                         <span class="text-teal-accent font-black text-[10px] tracking-widest uppercase italic">Lộ trình 1</span>
                         <span class="material-icons-round text-teal-accent text-3xl">work</span>
                     </div>
-                    <h3 class="text-2xl font-black text-white mb-2 uppercase tracking-tighter leading-none italic">MASTERING AI FOR WORK</h3>
-                    <p class="text-gray-400 text-[10px] font-bold mb-8 uppercase opacity-70">CÂN MỌI TÁC VỤ CÔNG VIỆC</p>
-                    
+                    <h3 class="text-2xl font-black text-white mb-2 uppercase tracking-tighter italic">MASTERING AI for WORK</h3>
                     <div class="mb-10">
                         <div class="flex items-center gap-2 mb-2">
                             <span class="text-gray-500 line-through text-sm font-bold">5.900.000đ</span>
@@ -147,23 +190,20 @@
                             <span class="text-gray-500 text-[9px] font-black uppercase whitespace-nowrap">/ NGƯỜI</span>
                         </div>
                     </div>
-
-                    <ul class="space-y-4 mb-10 flex-grow text-gray-300 text-sm font-medium">
+                    <ul class="space-y-4 mb-10 flex-grow text-gray-300 font-medium text-sm">
                         <li class="flex items-center gap-3"><span class="material-icons-round text-teal-accent text-lg">check_circle</span> Giảng viên thực chiến</li>
                         <li class="flex items-center gap-3"><span class="material-icons-round text-teal-accent text-lg">check_circle</span> 10 bài học mỗi 3 tuần</li>
                     </ul>
-                    <button class="w-full py-4 rounded-2xl border border-white/10 bg-white/5 text-white font-black text-sm uppercase tracking-tighter hover:bg-white/10 transition-all">Đăng ký ngay →</button>
+                    <button class="w-full py-4 rounded-2xl border border-white/10 text-white font-black text-sm uppercase">Đăng ký ngay →</button>
                 </div>
 
                 <!-- Plan 2 -->
-                <div class="relative glass-panel rounded-[2.5rem] p-8 lg:p-10 flex flex-col hover:border-white/30 transition-all group">
-                    <div class="flex justify-between items-center mb-6">
+                <div class="glass-panel rounded-[2.5rem] p-10 flex flex-col border-white/5 hover:border-white/20 transition-all">
+                    <div class="flex justify-between items-center mb-8">
                         <span class="text-orange-accent font-black text-[10px] tracking-widest uppercase italic">Lộ trình 2</span>
                         <span class="material-icons-round text-orange-accent text-3xl">movie</span>
                     </div>
-                    <h3 class="text-2xl font-black text-white mb-2 uppercase tracking-tighter leading-none italic">MASTERING AI FOR MEDIA</h3>
-                    <p class="text-gray-400 text-[10px] font-bold mb-8 uppercase opacity-70">SÁNG TẠO & TRUYỀN THÔNG</p>
-                    
+                    <h3 class="text-2xl font-black text-white mb-2 uppercase tracking-tighter italic">MASTERING AI for MEDIA</h3>
                     <div class="mb-10">
                         <div class="flex items-center gap-2 mb-2">
                             <span class="text-gray-500 line-through text-sm font-bold">6.900.000đ</span>
@@ -174,30 +214,25 @@
                             <span class="text-gray-500 text-[9px] font-black uppercase whitespace-nowrap">/ NGƯỜI</span>
                         </div>
                     </div>
-
-                    <ul class="space-y-4 mb-10 flex-grow text-gray-300 text-sm font-medium">
+                    <ul class="space-y-4 mb-10 flex-grow text-gray-300 font-medium text-sm">
                         <li class="flex items-center gap-3"><span class="material-icons-round text-orange-accent text-lg">check_circle</span> 12 bài học mỗi 4 tuần</li>
                         <li class="flex items-center gap-3"><span class="material-icons-round text-orange-accent text-lg">check_circle</span> Chuyên sâu Media</li>
                     </ul>
-                    <button class="w-full py-4 rounded-2xl border border-white/10 bg-white/5 text-white font-black text-sm uppercase tracking-tighter hover:bg-white/10 transition-all">Đăng ký ngay →</button>
+                    <button class="w-full py-4 rounded-2xl border border-white/10 text-white font-black text-sm uppercase">Đăng ký ngay →</button>
                 </div>
 
-                <!-- Plan Combo (Hot) -->
-                <div class="relative flex flex-col h-full group">
+                <!-- Plan Combo (HOT) -->
+                <div class="relative group h-full">
                     <div class="absolute -inset-1 bg-gradient-to-r from-red-500 to-purple-600 rounded-[2.8rem] blur-xl opacity-30 group-hover:opacity-60 transition-all"></div>
-                    <div class="relative flex flex-col h-full rounded-[2.5rem] border-2 border-white/20 bg-[#141824] p-8 lg:p-10 shadow-2xl">
+                    <div class="relative h-full glass-panel !bg-[#141824] rounded-[2.5rem] p-10 flex flex-col border-2 border-white/10 shadow-2xl">
                         <div class="absolute top-4 right-8 flex items-center gap-1 z-20">
                             <div class="bg-red-accent text-white text-[9px] font-black px-3 py-1 rounded-full uppercase">BEST VALUE</div>
                             <span class="material-icons-round text-red-accent text-xl animate-pulse">star</span>
                         </div>
-
-                        <div class="flex justify-between items-center mb-6">
-                            <span class="text-red-accent font-black text-[10px] tracking-widest uppercase italic">Lộ trình Combo</span>
+                        <div class="flex justify-between items-center mb-8">
+                            <span class="text-red-accent font-black text-[10px] tracking-widest uppercase italic">Combo Siêu Cấp</span>
                         </div>
-
-                        <h3 class="text-2xl font-black text-white mb-2 uppercase tracking-tighter leading-none italic">MASTERING AI FOR WORK & MEDIA</h3>
-                        <p class="text-gray-400 text-[10px] font-bold mb-8 uppercase opacity-70">CHUYÊN GIA AI TOÀN DIỆN</p>
-                        
+                        <h3 class="text-2xl font-black text-white mb-2 uppercase tracking-tighter italic">AI WORK & MEDIA MASTER</h3>
                         <div class="mb-10">
                             <div class="flex items-center gap-2 mb-2">
                                 <span class="text-gray-500 line-through text-sm font-bold">12.000.000đ</span>
@@ -208,12 +243,11 @@
                                 <span class="text-gray-500 text-[9px] font-black uppercase whitespace-nowrap">/ NGƯỜI</span>
                             </div>
                         </div>
-
-                        <ul class="space-y-4 mb-12 flex-grow text-gray-300 text-sm font-medium">
+                        <ul class="space-y-4 mb-12 flex-grow text-gray-300 font-medium text-sm">
                             <li class="flex items-center gap-3"><span class="material-icons-round text-red-accent text-lg">check_circle</span> Quyền lợi của 2 lộ trình</li>
                             <li class="flex items-center gap-3"><span class="material-icons-round text-red-accent text-lg">check_circle</span> Ưu tiên hỗ trợ 1:1</li>
                         </ul>
-                        <button class="w-full py-5 rounded-2xl bg-gradient-to-r from-red-500 to-purple-600 text-white font-black text-sm uppercase tracking-tighter hover:scale-105 transition-all shadow-lg">HÃY ĐĂNG KÝ NGAY</button>
+                        <button class="w-full py-5 rounded-2xl bg-gradient-to-r from-red-500 to-purple-600 text-white font-black text-sm uppercase hover:scale-105 transition-all shadow-lg">HÃY ĐĂNG KÝ NGAY</button>
                     </div>
                 </div>
             </div>
@@ -221,50 +255,44 @@
     </section>
 
     <!-- Gemini Idea Generator -->
-    <section class="py-24 bg-[#0a0f1d]">
-        <div class="container mx-auto px-6 max-w-4xl">
-            <div id="idea-container" class="glass-panel p-10 lg:p-14 rounded-[3rem] border border-primary/20 relative overflow-hidden text-center">
-                <div class="mb-8">
-                    <span class="material-icons-round text-primary text-5xl mb-4">auto_fix_high</span>
-                    <h2 class="text-3xl font-black text-white uppercase italic tracking-tighter">Sáng tạo Ý tưởng AI</h2>
-                    <p class="text-gray-400 mt-2 font-medium">Nhận ngay 3 ý tưởng video từ Gemini 2.5 Flash</p>
+    <section class="py-24">
+        <div class="container mx-auto px-6">
+            <div id="idea-generator" class="glass-panel p-10 lg:p-14 rounded-[3rem] border border-primary/20 max-w-5xl mx-auto shadow-2xl text-center">
+                <div class="w-20 h-20 mx-auto bg-primary/10 rounded-full flex items-center justify-center border border-primary/30 mb-8 animate-pulse-glow">
+                    <span class="material-icons-round text-primary text-4xl">auto_fix_high</span>
                 </div>
-                <div class="flex flex-col sm:flex-row gap-4">
+                <h2 class="text-3xl lg:text-4xl font-black text-white uppercase italic mb-8">Sáng tạo Ý tưởng với AI</h2>
+                <div class="flex flex-col sm:flex-row gap-4 mb-12">
                     <input id="niche-input" type="text" placeholder="Nhập lĩnh vực (vd: Mỹ phẩm, Gia dụng...)" class="form-input" />
-                    <button id="gen-btn" class="bg-primary text-white px-8 py-4 rounded-2xl font-black uppercase tracking-widest shadow-neon hover:scale-105 transition-all whitespace-nowrap">Gợi ý ngay</button>
+                    <button id="gen-btn" class="bg-primary text-white px-10 py-4 rounded-2xl font-black uppercase tracking-widest shadow-neon whitespace-nowrap hover:scale-105 transition-all">Gợi ý ngay</button>
                 </div>
-                <div id="results-box" class="mt-12 grid gap-6 text-left"></div>
+                <div id="ideas-result" class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left"></div>
             </div>
         </div>
     </section>
 
     <!-- Registration -->
-    <section id="register" class="py-24 bg-background-dark">
-        <div class="container mx-auto px-6 max-w-7xl">
+    <section id="register" class="py-32 bg-background-dark">
+        <div class="container mx-auto px-6 lg:px-12 max-w-7xl">
             <div class="grid lg:grid-cols-3 gap-12 items-center">
                 <div class="text-center group">
-                    <div class="w-32 h-32 mx-auto glass-panel rounded-[2rem] flex items-center justify-center mb-6">
-                        <span class="material-symbols-outlined text-6xl text-blue-400">calendar_month</span>
+                    <div class="w-24 h-24 mx-auto glass-panel rounded-3xl flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-5xl text-blue-400">calendar_month</span>
                     </div>
-                    <h4 class="text-white font-black text-2xl uppercase italic">Khai giảng</h4>
-                    <p class="text-gray-500 font-bold">Hàng tháng</p>
+                    <h4 class="text-white font-black text-xl uppercase italic">Khai giảng tháng này</h4>
                 </div>
                 <div class="glass-panel p-10 rounded-[3rem] border-white/20">
-                    <form class="space-y-4" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã đăng ký!')">
+                    <form class="space-y-4" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã đăng ký!');">
                         <input type="text" placeholder="Họ tên của bạn |" class="form-input" required />
                         <input type="tel" placeholder="Số điện thoại |" class="form-input" required />
                         <button type="submit" class="w-full bg-pink-button py-5 rounded-2xl text-white font-black uppercase tracking-widest shadow-neon hover:scale-105 transition-all">👉 ĐĂNG KÝ GIỮ CHỖ</button>
                     </form>
                 </div>
                 <div class="text-center group">
-                    <div class="w-32 h-32 mx-auto glass-panel rounded-[2rem] flex items-center justify-center mb-6 relative">
-                        <span class="material-symbols-outlined text-6xl text-gray-400">verified_user</span>
-                        <div class="absolute -top-2 -right-2 bg-green-500 w-8 h-8 rounded-full flex items-center justify-center border-4 border-[#0F172A]">
-                            <span class="material-icons-round text-white text-sm">check</span>
-                        </div>
+                    <div class="w-24 h-24 mx-auto glass-panel rounded-3xl flex items-center justify-center mb-6 relative">
+                        <span class="material-symbols-outlined text-5xl text-gray-400">verified_user</span>
                     </div>
-                    <h4 class="text-white font-black text-2xl uppercase italic">Cam kết vàng</h4>
-                    <p class="text-gray-500 font-bold">Hoàn tiền 100%</p>
+                    <h4 class="text-white font-black text-xl uppercase italic">Hoàn tiền 100% nếu không hài lòng</h4>
                 </div>
             </div>
         </div>
@@ -275,43 +303,85 @@
         <div class="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-6">
                 <div>
-                    <span class="text-[9px] text-gray-500 uppercase font-black tracking-widest block">Ưu đãi kết thúc:</span>
-                    <div class="flex gap-2 text-white font-black text-xl">
-                        <span id="h">05</span>:<span id="m">42</span>:<span id="s" class="text-red-500">18</span>
+                    <span class="text-[9px] text-gray-400 uppercase font-black tracking-widest mb-1 block">Kết thúc sau:</span>
+                    <div class="flex gap-2 text-white font-black text-xl tabular-nums">
+                        <span id="h">05</span>:<span id="m">42</span>:<span id="s" class="text-red-500 animate-pulse">18</span>
                     </div>
                 </div>
             </div>
             <div class="flex items-center gap-6">
                 <div class="hidden sm:block text-right">
-                    <span class="text-[9px] text-gray-500 font-black uppercase tracking-widest block">Combo Siêu Tiết Kiệm</span>
+                    <span class="text-[9px] text-gray-400 font-black uppercase tracking-widest block">Combo Siêu Tiết Kiệm</span>
                     <span class="text-red-500 font-black text-2xl tracking-tighter">1,990,000đ</span>
                 </div>
-                <button onclick="document.getElementById('register').scrollIntoView()" class="bg-blue-600 text-white px-10 py-4 rounded-full font-black uppercase tracking-tighter hover:scale-105 transition-all shadow-lg">ĐĂNG KÝ NGAY ⚡</button>
+                <button onclick="document.getElementById('register').scrollIntoView()" class="bg-blue-600 text-white px-10 py-4 rounded-full font-black uppercase tracking-tighter hover:scale-105 transition-all">ĐĂNG KÝ NGAY ⚡</button>
             </div>
         </div>
     </div>
 
-    <!-- Gemini Script -->
+    <!-- SCRIPTS -->
+    <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://esm.sh/@google/genai@^1.39.0",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/"
+  }
+}
+</script>
     <script type="module">
         import { GoogleGenAI, Type } from "@google/genai";
 
+        // Constants Data
+        const ROADMAP_DATA = [
+            { id: '1', step: '01', title: 'Tư duy AI Media', icon: 'psychology' },
+            { id: '2', step: '02', title: 'Bậc thầy Prompt', icon: 'chat' },
+            { id: '3', step: '03', title: 'Midjourney Basic', icon: 'image' },
+            { id: '4', step: '04', title: 'Midjourney Pro', icon: 'science' },
+            { id: '5', step: '05', title: 'Firefly AI', icon: 'brush' },
+            { id: '6', step: '06', title: 'AI Video', icon: 'movie' },
+            { id: '7', step: '07', title: 'AI Music', icon: 'music_note', isSpecial: true },
+            { id: '8', step: '08', title: 'AI Voice', icon: 'record_voice_over', isSpecial: true },
+            { id: '9', step: '09', title: 'MC Ảo HeyGen', icon: 'face' },
+            { id: '10', step: '10', title: 'Stable Diffusion', icon: 'edit_note' },
+            { id: '11', step: '11', title: 'Workflow Pro', icon: 'bolt' },
+            { id: '12', step: '12', title: 'TỐT NGHIỆP', icon: 'check_circle', isSpecial: true }
+        ];
+
+        // Render Roadmap
+        const grid = document.getElementById('roadmap-grid');
+        ROADMAP_DATA.forEach(item => {
+            const div = document.createElement('div');
+            const isSpecial = item.isSpecial;
+            const isLast = item.id === '12';
+            div.className = `relative glass-panel p-8 rounded-3xl border-white/10 hover:border-white/30 transition-all hover:-translate-y-1 ${isSpecial ? 'bg-orange-500/10' : ''} ${isLast ? 'bg-gradient-to-br from-orange-500 to-blue-600 !border-none' : ''}`;
+            div.innerHTML = `
+                <div class="absolute -top-3 -left-3 w-8 h-8 rounded-full flex items-center justify-center font-black text-[10px] bg-dark-blue border border-white/10 text-gray-400">${item.step}</div>
+                <span class="material-symbols-outlined text-4xl mb-4 ${isLast ? 'text-white' : isSpecial ? 'text-orange-accent' : 'text-blue-400'}">${item.icon}</span>
+                <h3 class="text-white font-black text-lg uppercase tracking-tighter leading-tight">${item.title}</h3>
+            `;
+            grid.appendChild(div);
+        });
+
+        // Gemini AI Logic
         const nicheInput = document.getElementById('niche-input');
         const genBtn = document.getElementById('gen-btn');
-        const resultsBox = document.getElementById('results-box');
+        const resultDiv = document.getElementById('ideas-result');
 
         genBtn.addEventListener('click', async () => {
             const niche = nicheInput.value;
             if(!niche) return;
 
             genBtn.disabled = true;
-            genBtn.innerText = "Đang xử lý...";
-            resultsBox.innerHTML = "";
+            genBtn.innerHTML = '<span class="material-icons-round animate-spin">sync</span> ĐANG XỬ LÝ...';
+            resultDiv.innerHTML = "";
 
             try {
-                const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+                const ai = new GoogleGenAI({ apiKey: "AIza..." }); // process.env.API_KEY automatically handled by Vercel
                 const response = await ai.models.generateContent({
                     model: 'gemini-3-flash-preview',
-                    contents: `Hãy gợi ý cho tôi 3 ý tưởng video ngắn (TikTok/Reels) cho lĩnh vực "${niche}". Bao gồm tiêu đề, tóm tắt và mẹo AI. Trả về JSON tiếng Việt.`,
+                    contents: `Gợi ý 3 ý tưởng video ngắn cho lĩnh vực: ${niche}. Trả về JSON tiếng Việt: [{title, content, aiTip}]`,
                     config: {
                         responseMimeType: "application/json",
                         responseSchema: {
@@ -330,26 +400,23 @@
 
                 const ideas = JSON.parse(response.text);
                 ideas.forEach((idea, i) => {
-                    resultsBox.innerHTML += `
-                        <div class="glass-panel p-6 rounded-2xl border-white/10 hover:border-primary/50 transition-all">
-                            <h4 class="text-white font-black text-lg mb-2 tracking-tight">${idea.title}</h4>
-                            <p class="text-gray-400 text-sm font-medium mb-4">${idea.content}</p>
-                            <div class="bg-blue-500/10 p-3 rounded-lg border border-blue-500/20 text-[11px] text-blue-300 font-bold">
-                                💡 Tip: ${idea.aiTip}
-                            </div>
+                    resultDiv.innerHTML += `
+                        <div class="glass-panel p-6 rounded-2xl border-white/10 hover:border-primary/40 transition-all">
+                            <h4 class="text-white font-black text-lg mb-2">${idea.title}</h4>
+                            <p class="text-gray-400 text-xs mb-4 font-medium">${idea.content}</p>
+                            <div class="bg-blue-500/10 p-3 rounded-lg border border-blue-500/20 text-[10px] text-blue-300 font-bold">💡 Tip: ${idea.aiTip}</div>
                         </div>
                     `;
                 });
             } catch (err) {
-                console.error(err);
-                resultsBox.innerHTML = "<p class='text-red-400'>Lỗi kết nối AI. Vui lòng thử lại.</p>";
+                resultDiv.innerHTML = "<p class='text-red-400 text-sm'>Lỗi kết nối AI. Vui lòng thử lại.</p>";
             } finally {
                 genBtn.disabled = false;
-                genBtn.innerText = "Gợi ý ngay";
+                genBtn.innerHTML = 'GỢI Ý NGAY';
             }
         });
 
-        // Timer logic
+        // Timer Logic
         let h=5, m=42, s=18;
         setInterval(() => {
             if(s>0) s--; else { s=59; if(m>0) m--; else { m=59; if(h>0) h--; } }
